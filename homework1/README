@@ -1,0 +1,42 @@
+##
+## Homework 1 
+## COMS 4130 Principles and Practice of Parallel Programming 
+## Fall 2011
+##
+
+**** Problem 1 (SpellCheck) ****
+
+You are given a dictionary. You can make your own dictinary for testing or use the 
+dictionary at /usr/share/dict/words on Three Musketeers. Implement a check() method 
+that determines if a word is in the dictionary.
+
+Use SpellCheck.x10 as a template. Put in code right where it says "Write your code here."
+
+**** Problem 2 (Network Shortest Path) ****
+
+Given a network of swiches , a source and destination, set the switches to establish 
+the shortest possible connection from source to destination. You may assume that all 
+the edges have weight 1.
+
+You can think of the network switches as graph nodes. If you are unfamiliar with graph 
+terms and algorithms, you may want to read up on adjacency matrices and Breadth First Search.
+
+It is recommended that you use the template provided in Network.x10. Just rewrite the 
+createPath() method. You may assume you are allowed to clear the switch settings between 
+consecutive calls to createPath(). In Network.X10, "setting the switches" means setting 
+the incoming and outgoing path for each switch so that a message starting at the source 
+can propagate to the destination. For example, if a network has 10 switches and the shortest
+path from switch 0 to 2 is [switch 0, switch 4, switch 7, switch 2], switch 4's switch 
+( to pick an example at random ) should have incoming path set to 0 and outgoing path set to 7.
+
+**** Problem 3 (Splay Tree) ****
+
+Implement a SplayTree class in X10. You can read up on Splay Trees here: 
+http://en.wikipedia.org/wiki/Splay_tree.
+
+It is recommended that you use the provided template in SplayTree.x10. The provided template 
+closely follows the steps described in the Wiki article and does a lot of the work for you. 
+You just have to re-write the splay() function, which is currently empty. The provided template 
+should still compile and run, it will just behave like a binary search tree.  The test cases 
+given in the template are examples, we may test you on more than those cases.
+

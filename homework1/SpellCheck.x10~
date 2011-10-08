@@ -98,8 +98,6 @@ public class SpellCheck {
 	  for(var index:Int = 0; index < 10; index++){
 	  word = dict(index); 	   
 	  hashValue = Hash(word);
-	  
-	  Console.OUT.println("Word: "+word+"Key: "+hashValue);
 	  index++;
 	  }
 

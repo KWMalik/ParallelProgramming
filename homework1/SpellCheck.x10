@@ -2,6 +2,7 @@ import x10.io.File;
 import x10.lang.String;
 import x10.lang.Char;
 import x10.util.HashMap;
+
 /**
  ** A homemade spellchecker
  **
@@ -19,7 +20,7 @@ public class SpellCheck {
     public def this(dictionary:Rail[String]) {
 	
 	dict = dictionary;
-	hashMap = new HashMap[Int, String](235886);
+	hashMap = new HashMap[Int, String](900000);
     }
     
     public static def make(filename:String) : SpellCheck {
@@ -36,7 +37,7 @@ public class SpellCheck {
 	Console.OUT.println(nwords + " in dictionary");
 
 	val dict = new Rail[String](nwords,"");
-	val hashMap = new HashMap[Int,String](nwords);
+	val hashMap = new HashMap[Int,String](900000);
 	
 	var i:Int = 0;
 	for (line in I.lines()) {
@@ -55,15 +56,30 @@ public class SpellCheck {
 	 ** Implement a capitalization-insensitive spellcheck here.
 	 **/
 	
-	for(var k: Int = 1; k <= 10; k++){
 	
+	
+	/*
+
+        Finding particular value form the HashMap:
+
+        HashMap's containsValue method returns boolean depending upon
+        the presence of the value in given HashMap
+
+        Signature of the containsValue method is,
+        boolean containsKey(Object value)
+
+
+
+	*/	
+	var key:Int;
+	key  = Hash(word);	
+	if(hashMap.containsKey(key)){
+                return true;
+        }else {
+                return false;
+        }
 
 	
-	}
-	    
-	/***** Write your code here *****/
-
-	return false;
 
 
 	/***** Write your code here *****/
@@ -73,15 +89,15 @@ public class SpellCheck {
 
     public def Hash(toHash:String):Int{
 
-    var hashValue:Int = 7;
+    var hashValue:Int = 0;
 
     for (var Position: Int = 0; Position < toHash.length(); Position++)
     	hashValue = hashValue*31 + Char.ord(toHash.charAt(Position));
 	
-	hashValue %=235886;
+	hashValue %=900000;
 	
 	if( hashValue < 0)
-    	  hashValue = hashValue + 235886;
+    	  hashValue = hashValue + 900000;
         
     	
 	return hashValue;
@@ -95,14 +111,17 @@ public class SpellCheck {
 	  var hashValue:Int = 0;
 	  
 	  var word:String = "";
-	  for(var index:Int = 0; index < 10; index++){
+	 
+	  for(var index:Int = 0; index < 235886; index++){
 	  word = dict(index); 	   
 	  hashValue = Hash(word);
-	  
-	  Console.OUT.println("Word: "+word+"Key: "+hashValue);
+
+	  /* Insert Key-Value Pair Into HashMap */
+	  hashMap.put(hashValue, word);	  
 	  index++;
 	  }
-
+	  
+	  
     }
 
 
@@ -119,10 +138,22 @@ public class SpellCheck {
 	// Wordlist should have one word per line.
 	// The following path works on Three Musketeers
 	val checker = SpellCheck.make("/usr/share/dict/words");  
-
+	
+	var hashMap:HashMap[Int,String];
+	
+	
 	checker.createHashMap();
+	hashMap = checker.hashMap;
+	Console.OUT.println("HashMap Size: "+ hashMap.size());
+	Console.OUT.println(hashMap.hash("string"));
 	checker.checkWithMessage("apple");
 	checker.checkWithMessage("quash");
 	checker.checkWithMessage("quasht");
+	checker.checkWithMessage("asdf");
+	checker.checkWithMessage("boy");
+	checker.checkWithMessage("girls");
+	checker.checkWithMessage("asdfsd");
+
+
     }
 }
